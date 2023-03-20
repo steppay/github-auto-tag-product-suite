@@ -1,0 +1,10 @@
+name: 'Auto tag product suite'
+description: '제품군에 자동으로 주간 릴리즈 후보 및 릴리즈 태그를 붙입니다.'
+author: 'Jihun Lee'
+branding:
+    icon: 'octicon-name'
+    color: 'blue'
+
+runs:
+    using: 'node16'
+    main: 'dist/bundle.js'

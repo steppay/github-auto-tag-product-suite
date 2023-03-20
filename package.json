@@ -1,0 +1,28 @@
+{
+    "name": "github-auto-tag-product-suite",
+    "packageManager": "yarn@3.3.0",
+    "scripts": {
+        "build": "webpack --mode production"
+    },
+    "source": "src/index.ts",
+    "module": "dist/index.js",
+    "engines": {
+        "node": "16"
+    },
+    "targets": {
+        "module": {
+            "context": "node",
+            "includeNodeModules": true
+        }
+    },
+    "dependencies": {
+        "@actions/core": "^1.10.0",
+        "@actions/github": "^5.1.1"
+    },
+    "devDependencies": {
+        "ts-loader": "^9.4.2",
+        "typescript": "^5.0.2",
+        "webpack": "^5.76.2",
+        "webpack-cli": "^5.0.1"
+    }
+}
