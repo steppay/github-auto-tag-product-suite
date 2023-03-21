@@ -4,6 +4,7 @@ import generateProductSuiteVersionByWeekNum from './utils/generateProductSuiteVe
 
 async function run() {
     try {
+        console.log('test2')
         await exec.exec('git', ['fetch'])
         const currentBranchName = await getCurrentBranchName()
 
