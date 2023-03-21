@@ -8,16 +8,12 @@ async function run() {
         const currentBranchName = await getCurrentBranchName()
 
         // push 한 브랜치명이 release 이고, develop 과 차이가 없으면 rc tag 를 부여한다.
-        console.log('branch name is ', currentBranchName, '.')
-        console.log('develop branch is ', isBranchExist('develop'), '.')
-        console.log('... is ', hasDifferentCommits(currentBranchName, 'develop'), '.')
         if (
             currentBranchName === 'release' &&
             isBranchExist('develop') &&
             hasDifferentCommits(currentBranchName, 'develop')
         ) {
             const tag = generateProductSuiteVersionByWeekNum() + '-rc'
-            console.log(tag)
             await exec.exec('git', ['tag', tag])
             await exec.exec('git', ['push', 'origin', tag])
         }
@@ -29,7 +25,6 @@ async function run() {
             hasDifferentCommits(currentBranchName, 'release')
         ) {
             const tag = generateProductSuiteVersionByWeekNum() + '-release'
-            console.log(tag)
             await exec.exec('git', ['tag', tag])
             await exec.exec('git', ['push', 'origin', tag])
         }
@@ -49,7 +44,11 @@ async function isBranchExist(branchName: string) {
 }
 
 async function hasDifferentCommits(branch1Name: string, branch2Name: string) {
-    const output = await exec.getExecOutput('git', ['log', `${branch1Name}...${branch2Name}`, '--oneline'])
+    const output = await exec.getExecOutput('git', [
+        'log',
+        `remotes/origin/${branch1Name}...remotes/origin/${branch2Name}`,
+        '--oneline',
+    ])
     return output.stdout.length > 0
 }
 
