@@ -37,7 +37,7 @@ async function run() {
 
 async function getCurrentBranchName() {
     const output = await exec.getExecOutput('git', ['branch', '--show-current'])
-    return output.stdout
+    return output.stdout.trim()
 }
 
 async function isBranchExist(branchName: string) {
