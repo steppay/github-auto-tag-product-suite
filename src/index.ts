@@ -41,18 +41,8 @@ async function getCurrentBranchName() {
 }
 
 async function isBranchExist(branchName: string) {
-    const output = await exec.getExecOutput('git', [
-        'branch',
-        '-a',
-        '|',
-        'grep',
-        '-w',
-        '-e',
-        `'${branchName}'`,
-        '-e',
-        `'remotes/origin/${branchName}'`,
-    ])
-    return output.stdout.includes(branchName)
+    const output = await exec.getExecOutput('git', ['branch', '-a'])
+    return output.stdout.search(new RegExp(branchName + '$', 'm')) !== -1
 }
 
 async function hasDifferentCommits(branch1Name: string, branch2Name: string) {
