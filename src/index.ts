@@ -10,7 +10,7 @@ async function run() {
         // push 한 브랜치명이 release 이고, develop 과 차이가 없으면 rc tag 를 부여한다.
         if (
             currentBranchName === 'release' &&
-            isBranchExist('develop') &&
+            (await isBranchExist('develop')) &&
             !(await hasDifferentCommits(currentBranchName, 'remotes/origin/develop'))
         ) {
             const tag = generateProductSuiteVersionByWeekNum() + '-rc'
@@ -21,7 +21,7 @@ async function run() {
         // push 한 브랜치명이 main 이나 master 이고, release 와 차이가 없으면 release tag 를 부여한다.
         if (
             (currentBranchName === 'main' || currentBranchName === 'master') &&
-            isBranchExist('release') &&
+            (await isBranchExist('release')) &&
             !(await hasDifferentCommits(currentBranchName, 'remotes/origin/release'))
         ) {
             const tag = generateProductSuiteVersionByWeekNum() + '-release'
