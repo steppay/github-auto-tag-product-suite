@@ -8,6 +8,9 @@ async function run() {
         const currentBranchName = await getCurrentBranchName()
 
         // push 한 브랜치명이 release 이고, develop 과 차이가 없으면 rc tag 를 부여한다.
+        console.log('branch name is ', currentBranchName, '.')
+        console.log('develop branch is ', isBranchExist('develop'), '.')
+        console.log('... is ', hasDifferentCommits(currentBranchName, 'develop'), '.')
         if (
             currentBranchName === 'release' &&
             isBranchExist('develop') &&
